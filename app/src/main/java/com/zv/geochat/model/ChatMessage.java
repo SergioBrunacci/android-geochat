@@ -1,9 +1,13 @@
 package com.zv.geochat.model;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class ChatMessage {
     private String id;
     private String userName;
     private String body;
+    private Date date;
 
     public ChatMessage() {
     }
@@ -11,14 +15,8 @@ public class ChatMessage {
     public ChatMessage(String userName, String body) {
         this.userName = userName;
         this.body = body;
+        this.date = Calendar.getInstance().getTime();
     }
-
-    public ChatMessage(String id, String userName, String body) {
-        this.id = id;
-        this.userName = userName;
-        this.body = body;
-    }
-
 
     public String getUserName() {
         return userName;
@@ -31,6 +29,10 @@ public class ChatMessage {
     public String getId() {
         return id;
     }
+
+    public Long getDate() { return date.getTime(); }
+
+    public void setDate(Long date) { this.date = new Date(date); }
 
     public void setId(String id) {
         this.id = id;
@@ -50,6 +52,7 @@ public class ChatMessage {
                 "id='" + id + '\'' +
                 ", userName='" + userName + '\'' +
                 ", body='" + body + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
