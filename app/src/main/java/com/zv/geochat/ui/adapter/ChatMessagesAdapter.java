@@ -1,6 +1,8 @@
 package com.zv.geochat.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import co.dift.ui.SwipeToAction;
 public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ChatMessage> items;
+    private Context context;
 
 
     /** References to the views for each data item **/
@@ -25,6 +28,7 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public TextView userName;
         public TextView chatMessageBody;
         public ImageView imageView;
+        public TextView timeDB;
 
         public ChatMessageViewHolder(View v) {
             super(v);
@@ -32,6 +36,8 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             userName = (TextView) v.findViewById(R.id.userName);
             chatMessageBody = (TextView) v.findViewById(R.id.body);
             imageView = (ImageView) v.findViewById(R.id.image);
+            timeDB = (TextView) v.findViewById(R.id.timeDB);
+            context = v.getContext();
         }
     }
 
@@ -64,6 +70,18 @@ public class ChatMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ChatMessageViewHolder vh = (ChatMessageViewHolder) holder;
         vh.userName.setText(item.getUserName());
         vh.chatMessageBody.setText(item.getBody());
+        String time = processDate(item.getDate());
+        vh.timeDB.setText(time);
         vh.data = item;
     }
+
+    private String processDate(Long date) {
+        return DateUtils.getRelativeDateTimeString(
+                this.context,
+                date,
+                DateUtils.SECOND_IN_MILLIS,
+                DateUtils.WEEK_IN_MILLIS,
+                0).toString();
+    }
+
 }
