@@ -84,7 +84,7 @@ public class ChatMessageStore {
 			chatMessage.setId(c.getString(indexId));
 			chatMessage.setUserName(c.getString(indexUserName));
 			chatMessage.setBody(c.getString(indexMsgBody));
-			chatMessage.setBody(c.getLong(indexTime));
+			chatMessage.setDate(c.getLong(indexTime));
 
 			list.add(chatMessage);
 
