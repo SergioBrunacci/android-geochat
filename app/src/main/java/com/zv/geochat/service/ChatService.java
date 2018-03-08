@@ -114,7 +114,6 @@ public class ChatService extends Service {
             notificationDecorator.displayExpandableNotification("Sending message...", messageText);
             chatMessageStore.insert(new ChatMessage(myName, messageText));
             sendBroadcastNewMessage(myName, messageText);
-            setTimer();
         } else if (command == CMD_RECEIVE_MESSAGE) {
             String testUser = "Test User";
             String testMessage = "Simulated Message";
